@@ -1,16 +1,32 @@
 import CommonForm from "@/components/common/Form";
 import { loginFormControls } from "@/config";
+import { loginUser } from "@/store/auth-slice";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const initialState = {
     email: "",
     password: "",
 };
-const onsubmit = () => { };
+
 
 function Login() {
     const [formData, setFormData] = useState(initialState);
+    const dispatch = useDispatch();
+
+    function onsubmit(e) {
+        e.preventDefault();
+        dispatch(loginUser(formData)).then((data) => {
+            if (data?.payload.success) {
+                toast.success(data?.payload.message)
+            } else {
+                toast.error(data?.payload.message)
+            }
+        });
+    };
+
     return (
         <div className="mx-auto w-full max-w-md space-y-6">
             <div className="text-center">
@@ -32,7 +48,7 @@ function Login() {
                 formData={formData}
                 setFormData={setFormData}
                 buttonText={"Login"}
-                onsubmit={onsubmit}
+                onSubmit={onsubmit}
             />
         </div>
     );

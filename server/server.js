@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose"); // helps to connect server with db
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const authRouter = require("./routes/auth/auth-route");
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -11,7 +12,6 @@ mongoose
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -29,5 +29,6 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+app.use("/api/auth", authRouter); // /api/auth/register ->call registerUser
 
 app.listen(PORT, () => console.log("Server is now running on PORT ", PORT));
