@@ -5,6 +5,7 @@ function CheckAuth({ isAuthenticated, user, children }) {
     // Get the current location (path) from React Router
     const location = useLocation();
 
+
     // If the user is not authenticated and they're not already on the login or register pages,
     // redirect them to the login page.
     if (!isAuthenticated && !(location.pathname.includes('/login') || location.pathname.includes('/register'))) {

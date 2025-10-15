@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "./components/ui/button";
 import Login from "./pages/auth/login";
 import { Route, Routes } from "react-router-dom";
@@ -17,7 +17,8 @@ import Checkout from "./pages/shopping-cart/Checkout";
 import Account from "./pages/shopping-cart/Account";
 import CheckAuth from "./components/common/CheckAuth";
 import UnAuth from "./pages/unauth-page";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { checkAuth } from "./store/auth-slice";
 
 function App() {
   // const isAuthenticated = false;
@@ -26,7 +27,15 @@ function App() {
   //   role: "custmer"
   // };
 
-  const { user, isAuthenticated } = useSelector(state => state.auth)
+  const { user, isAuthenticated, isLoading } = useSelector(state => state.auth)
+
+  const dispath = useDispatch()
+  useEffect(() => {
+    dispath(checkAuth())
+  }, [])
+
+  if (isLoading) return <p>loading...</p>
+
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
