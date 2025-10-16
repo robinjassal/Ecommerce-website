@@ -11,7 +11,6 @@ const initialFormData = {
     description: '',
     category: '',
     brand: '',
-    price: "",
     price: '',
     salePrice: '',
     totalStock: ''
