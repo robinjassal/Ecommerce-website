@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button } from "./components/ui/button";
 import Login from "./pages/auth/login";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import AuthLayout from "./components/auth/layout";
 import Register from "./pages/auth/register";
 import AdminLayout from "./components/admin/layout";
@@ -78,7 +78,8 @@ function App() {
           <Route path="account" element={<Account />} />
         </Route>
         <Route path="/unauth-page" element={<UnAuth />} />
-        <Route path="*" element={<NotFound />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<Navigate to="/auth/login" replace />} />
       </Routes>
     </div>
   );

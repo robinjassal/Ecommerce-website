@@ -10,7 +10,9 @@ function ProductImageUpload({
     setImageFile,
     uploadedImageUrl,
     setUploadedImageUrl,
-    setIsImageLoading
+    setIsImageLoading,
+    isImageLoading,
+    isEditMode
 }) {
     const inputRef = useRef(null);
 
@@ -67,26 +69,28 @@ function ProductImageUpload({
                     className="hidden"
                     ref={inputRef}
                     onChange={handleImageFileChange}
+                    disabled={isEditMode}
                 />
                 {!imageFile ? (
                     <Label
                         htmlFor="image-upload"
-                        className={`$flex flex-col items-center justify-center h-32 cursor-pointer`}
+                        className={`flex flex-col items-center justify-center h-32 cursor-pointer ${isEditMode ? "cursor-not-allowed" : ""}`}
                     >
                         <UploadCloudIcon className="w-10 h-10 text-muted-foreground mb-2" />
                         <span>Drag & drop or click to upload image</span>
                     </Label>
                 ) : (
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                            <FileIcon className="w-8 h-8 text-primary mr-2" />
+                    isImageLoading ? <p>loading...</p> :
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <FileIcon className="w-8 h-8 text-primary mr-2" />
+                            </div>
+                            <p className="text-sm font-medium">{imageFile.name}</p>
+                            <Button variant="ghost" size="icon" onClick={handleRemoveImage}>
+                                <XIcon className="w-4 h-4" />
+                                <span className="sr-only">Remove File</span>
+                            </Button>
                         </div>
-                        <p className="text-sm font-medium">{imageFile.name}</p>
-                        <Button variant="ghost" size="icon" onClick={handleRemoveImage}>
-                            <XIcon className="w-4 h-4" />
-                            <span className="sr-only">Remove File</span>
-                        </Button>
-                    </div>
                 )}
             </div>
         </div>
