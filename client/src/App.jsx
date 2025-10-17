@@ -73,7 +73,7 @@ function App() {
           }
         >
           <Route path="home" element={<Home />} />
-          <Route path="products-listing" element={<ProductListing />} />
+          <Route path="listing" element={<ProductListing />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="account" element={<Account />} />
         </Route>
