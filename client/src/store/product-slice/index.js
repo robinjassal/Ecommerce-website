@@ -10,44 +10,53 @@ export const addNewProduct = createAsyncThunk(
   "/products/addnewProduct",
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/admin/products/add",
+      `${process.env.REACT_APP_API_URL}/admin/products/add`,
       formData,
       {
-        "Content-Type": "application/json",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
     return response?.data;
   }
 );
+
 export const fetchAllProducts = createAsyncThunk(
   "/products/fetchAllProducts",
-  async (formData) => {
+  async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/admin/products/get"
+      `${process.env.REACT_APP_API_URL}/admin/products/get`
     );
     return response?.data;
   }
 );
+
 export const editProduct = createAsyncThunk(
   "/products/editProduct",
   async ({ id, formData }) => {
     const response = await axios.put(
-      `http://localhost:5000/api/admin/products/edit/${id}`,
+      `${process.env.REACT_APP_API_URL}/admin/products/edit/${id}`,
       formData,
       {
-        "Content-Type": "application/json",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
     return response?.data;
   }
 );
+
 export const deleteProduct = createAsyncThunk(
   "/products/deleteProduct",
   async (id) => {
     const response = await axios.delete(
-      `http://localhost:5000/api/admin/products/delete/${id}`,
+      `${process.env.REACT_APP_API_URL}/admin/products/delete/${id}`,
       {
-        "Content-Type": "application/json",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
     return response?.data;
