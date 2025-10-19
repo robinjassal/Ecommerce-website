@@ -4,16 +4,13 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { brandOptionsMap, categoryOptionsMap } from "@/config";
 
-function ProductTile({
-  product,
-  setFormData,
-  setOpenProductsDialog,
-  setCurrentEditedId,
-  handleDelete,
-}) {
+function ProductTile({ product, handleGetProductDetails }) {
   return (
     <Card className="w-full max-w-md mx-auto mt-4">
-      <div>
+      <div
+        onClick={() => handleGetProductDetails(product?._id)}
+        className="cursor-pointer z-10"
+      >
         <div className="relative">
           <img
             src={product?.image}
@@ -52,7 +49,13 @@ function ProductTile({
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" onClick={() => {}}>
+          <Button
+            className="w-full z-50"
+            onClick={(e) => {
+              e.stopPropagation(); // ✅ prevent outer onClick
+              console.log("Add to cart clicked", product?._id);
+            }}
+          >
             Add to cart
           </Button>
         </CardFooter>

@@ -4,13 +4,27 @@ import axios from "axios";
 const initialState = {
   productList: [],
   isLoading: true,
+  productDetails: null,
 };
 
 export const fetchAllFilterProducts = createAsyncThunk(
   "/products/fetchAllFilterProducts",
-  async () => {
+  async ({ filterParams, sortParams }) => {
+    const query = new URLSearchParams({
+      ...filterParams,
+      sortBy: sortParams,
+    });
     const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/shop/products/get`
+      `${import.meta.env.VITE_API_URL}/shop/products/get?${query}`
+    );
+    return response?.data;
+  }
+);
+export const fetchProductDetails = createAsyncThunk(
+  "/products/fetchProductDetails",
+  async (id) => {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/shop/products/get/${id}`
     );
     return response?.data;
   }
@@ -32,6 +46,17 @@ const ShopProductsSlice = createSlice({
       .addCase(fetchAllFilterProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.productList = [];
+      })
+      .addCase(fetchProductDetails.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchProductDetails.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.productDetails = action.payload.data;
+      })
+      .addCase(fetchProductDetails.rejected, (state, action) => {
+        state.isLoading = false;
+        state.productDetails = null;
       });
   },
 });
