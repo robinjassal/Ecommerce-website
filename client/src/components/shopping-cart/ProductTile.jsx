@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { brandOptionsMap, categoryOptionsMap } from "@/config";
 
-function ProductTile({ product, handleGetProductDetails }) {
+function ProductTile({ product, handleGetProductDetails, handleAddToCart }) {
   return (
     <Card className="w-full max-w-md mx-auto mt-4">
       <div
@@ -51,10 +51,7 @@ function ProductTile({ product, handleGetProductDetails }) {
         <CardFooter>
           <Button
             className="w-full z-50"
-            onClick={(e) => {
-              e.stopPropagation(); // ✅ prevent outer onClick
-              console.log("Add to cart clicked", product?._id);
-            }}
+            onClick={(e) => handleAddToCart(e, product?._id)}
           >
             Add to cart
           </Button>

@@ -5,10 +5,36 @@ import { Avatar, AvatarFallback } from "../ui/avatar";
 import { StarIcon } from "lucide-react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { setProductDetails } from "@/store/shop/products-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { addTocart, fetchCartItems } from "@/store/shop/cart-slice";
+import toast from "react-hot-toast";
 
 function ProductDetail({ open, setOpen, productDetails }) {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.shoppingCart);
+  function handleDialogClose() {
+    setOpen(false);
+    dispatch(setProductDetails());
+  }
+
+  const handleAddToCart = (productId) => {
+    console.log(productId);
+    dispatch(addTocart({ userId: user?.id, productId, quantity: 1 })).then(
+      (data) => {
+        if (data?.payload?.success) {
+          dispatch(fetchCartItems(user?.id));
+          toast.success("Added to Cart 🛒");
+        } else {
+          toast.error("Some error occured");
+        }
+      }
+    );
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
         <div className="relative overflow-hidden rounded-lg">
           <img
@@ -44,7 +70,12 @@ function ProductDetail({ open, setOpen, productDetails }) {
             <StarIcon />
           </div>
           <div>
-            <Button className="w-full">Add to Cart</Button>
+            <Button
+              className="w-full"
+              onClick={() => handleAddToCart(productDetails?._id)}
+            >
+              Add to Cart
+            </Button>
           </div>
           <hr />
           <div className="max-h-[200px] overflow-auto">
