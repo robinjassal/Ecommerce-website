@@ -4,12 +4,17 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { brandOptionsMap, categoryOptionsMap } from "@/config";
 
-function ProductTile({ product, handleGetProductDetails, handleAddToCart }) {
+function ProductTile({
+  product,
+  handleGetProductDetails,
+  handleAddToCart,
+  name = "",
+}) {
   return (
     <Card className="w-full max-w-md mx-auto mt-4">
       <div
         onClick={() => handleGetProductDetails(product?._id)}
-        className="cursor-pointer z-10"
+        className={`${name === "home" ? "" : "cursor-pointer"} z-10`}
       >
         <div className="relative">
           <img
@@ -50,7 +55,7 @@ function ProductTile({ product, handleGetProductDetails, handleAddToCart }) {
         </CardContent>
         <CardFooter>
           <Button
-            className="w-full z-50"
+            className="w-full z-50 cursor-pointer"
             onClick={(e) => handleAddToCart(e, product?._id)}
           >
             Add to cart
