@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   isLoading: false,
@@ -42,7 +43,7 @@ export const editAddress = createAsyncThunk(
 export const deleteAddress = createAsyncThunk(
   "/address/deleteAddress",
   async ({ userId, addressId }) => {
-    const res = await axios.put(
+    const res = await axios.delete(
       `${
         import.meta.env.VITE_API_URL
       }/shop/address/delete/${userId}/${addressId}`
@@ -62,11 +63,11 @@ const addressSlice = createSlice({
       })
       .addCase(addNewAddress.fulfilled, (state, action) => {
         state.isLoading = true;
-        state.addressList = action.payload.data;
+        // state.addressList = action.payload.data;
       })
       .addCase(addNewAddress.rejected, (state) => {
         state.isLoading = false;
-        state.addressList = [];
+        // state.addressList = [];
       })
       .addCase(fetchAllAddresses.pending, (state) => {
         state.isLoading = true;

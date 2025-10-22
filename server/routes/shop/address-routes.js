@@ -6,11 +6,11 @@ const {
   deleteAddress,
 } = require("../../controllers/shop/address-controllers");
 
-const Router = express.Router();
+const router = express.Router();
 
-Router.post("/add", addAddress);
-Router.get("/get/:userId", fetchAllAddress);
-Router.deleteAddress("/delete/:userId", deleteAddress);
-Router.put("/update/:userId", editAddress);
+router.post("/add", addAddress);
+router.get("/get/:userId", fetchAllAddress);
+router.delete("/delete/:userId/:addressId", deleteAddress);
+router.put("/update/:userId/:addressId", editAddress);
 
-module.exports = Router;
+module.exports = router;
