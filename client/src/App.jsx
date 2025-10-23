@@ -19,6 +19,7 @@ import CheckAuth from "./components/common/CheckAuth";
 import UnAuth from "./pages/unauth-page";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./store/auth-slice";
+import PaypalReturnPage from "./pages/shopping-cart/paypal-return";
 
 function App() {
   // const isAuthenticated = false;
@@ -27,15 +28,16 @@ function App() {
   //   role: "custmer"
   // };
 
-  const { user, isAuthenticated, isLoading } = useSelector(state => state.auth)
+  const { user, isAuthenticated, isLoading } = useSelector(
+    (state) => state.auth
+  );
 
-  const dispath = useDispatch()
+  const dispath = useDispatch();
   useEffect(() => {
-    dispath(checkAuth())
-  }, [])
+    dispath(checkAuth());
+  }, []);
 
-  if (isLoading) return <p>loading...</p>
-
+  if (isLoading) return <p>loading...</p>;
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
@@ -76,6 +78,7 @@ function App() {
           <Route path="listing" element={<ProductListing />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="account" element={<Account />} />
+          <Route path="paypal-return" element={<PaypalReturnPage />} />
         </Route>
         <Route path="/unauth-page" element={<UnAuth />} />
         {/* <Route path="*" element={<NotFound />} /> */}

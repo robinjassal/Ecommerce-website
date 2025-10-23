@@ -95,7 +95,10 @@ function HeaderRightContent() {
             </Badge>
           )}
         </div>
-        <CartWrapper cartItems={cartItems?.items} />
+        <CartWrapper
+          cartItems={cartItems?.items}
+          setOpenCartSheet={setOpenCartSheet}
+        />
       </Sheet>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

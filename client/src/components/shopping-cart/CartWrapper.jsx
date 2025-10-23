@@ -5,9 +5,8 @@ import { useSelector } from "react-redux";
 import CartItems from "./CartItems";
 import { useNavigate } from "react-router-dom";
 
-function CartWrapper({ cartItems }) {
+function CartWrapper({ cartItems, setOpenCartSheet }) {
   const navigate = useNavigate();
-
   const totalCartAmount =
     cartItems && cartItems.length > 0
       ? cartItems.reduce(
@@ -35,7 +34,15 @@ function CartWrapper({ cartItems }) {
           <span className="font-bold">${totalCartAmount}</span>
         </div>
       </div>
-      <Button className="w-full mt-5">Checkout</Button>
+      <Button
+        className="w-full mt-5"
+        onClick={() => {
+          navigate("/shop/checkout");
+          setOpenCartSheet(false);
+        }}
+      >
+        Checkout
+      </Button>
     </SheetContent>
   );
 }

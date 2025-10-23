@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCart, updateCartQty } from "@/store/shop/cart-slice";
 import toast from "react-hot-toast";
 
-function CartItems({ product, onIncrease, onDecrease }) {
+function CartItems({ product }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 

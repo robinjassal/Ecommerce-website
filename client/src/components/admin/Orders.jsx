@@ -13,7 +13,7 @@ import {
 import { Badge } from "../ui/badge";
 import OrderDetail from "./OrderDetail";
 
-function ShoppingOrders() {
+function AdminOrders() {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
   // ✅ Static sample data
@@ -99,4 +99,4 @@ function ShoppingOrders() {
   );
 }
 
-export default ShoppingOrders;
+export default AdminOrders;

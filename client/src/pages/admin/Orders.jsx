@@ -1,9 +1,8 @@
-import React from 'react'
+import AdminOrders from "@/components/admin/Orders";
+import React from "react";
 
 function Orders() {
-    return (
-        <div>Orders</div>
-    )
+  return <AdminOrders />;
 }
 
-export default Orders
+export default Orders;
