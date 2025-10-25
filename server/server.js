@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const authRouter = require("./routes/auth/auth-route");
 const adminProductsRouter = require("./routes/admin/products-route");
+const adminOrderRouter = require("./routes/admin/order-routes");
 const shopProductsRouter = require("./routes/shop/products-route");
 const shopCartRouter = require("./routes/shop/cart-routes");
 const addressRouter = require("./routes/shop/address-routes");
@@ -36,6 +37,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter); // /api/auth/register ->call registerUser
 app.use("/api/admin/products", adminProductsRouter);
+app.use("/api/admin/orders", adminOrderRouter);
 app.use("/api/shop/products", shopProductsRouter);
 app.use("/api/shop/cart", shopCartRouter);
 app.use("/api/shop/address", addressRouter);

@@ -20,6 +20,7 @@ import UnAuth from "./pages/unauth-page";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./store/auth-slice";
 import PaypalReturnPage from "./pages/shopping-cart/paypal-return";
+import PaymentSuccessPage from "./pages/shopping-cart/paypal-success";
 
 function App() {
   // const isAuthenticated = false;
@@ -79,6 +80,7 @@ function App() {
           <Route path="checkout" element={<Checkout />} />
           <Route path="account" element={<Account />} />
           <Route path="paypal-return" element={<PaypalReturnPage />} />
+          <Route path="payment-success" element={<PaymentSuccessPage />} />
         </Route>
         <Route path="/unauth-page" element={<UnAuth />} />
         {/* <Route path="*" element={<NotFound />} /> */}

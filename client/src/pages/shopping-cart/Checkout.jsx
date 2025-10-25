@@ -3,6 +3,7 @@ import CartItems from "@/components/shopping-cart/CartItems";
 import { Button } from "@/components/ui/button";
 import { createNewOrder } from "@/store/shop/order-slice";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 function Checkout() {
@@ -25,8 +26,16 @@ function Checkout() {
   const dispatch = useDispatch();
   const [isPaymentStart, setIsPaymentStart] = useState(false);
   function handleInitiatePayment() {
+    if (currentSelectedAddress === null) {
+      toast.error("Please selected one address to proceed");
+      return;
+    }
+    if (cartItems.length === 0) {
+      toast.error("Your cart is empty. Please add some items in cart");
+    }
     const orderData = {
       userId: user?.id,
+      cartId: cartItems?._id,
       cartItems: cartItems?.items?.map((cartItem) => ({
         productId: cartItem?.productId,
         title: cartItem?.title,
