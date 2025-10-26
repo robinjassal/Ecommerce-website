@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import AuthLayout from "./components/auth/layout";
-import Register from "./pages/auth/register";
 import AdminLayout from "./components/admin/layout";
 import Dashboard from "./pages/admin/Dashboard";
 import Products from "./pages/admin/Products";
@@ -20,6 +18,8 @@ import { checkAuth } from "./store/auth-slice";
 import PaypalReturnPage from "./pages/shopping-cart/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-cart/paypal-success";
 import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import AuthLayout from "./components/auth/layout";
 
 function App() {
   // const isAuthenticated = false;
