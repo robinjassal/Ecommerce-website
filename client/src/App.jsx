@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { Button } from "./components/ui/button";
-import Login from "./pages/auth/login";
 import { Navigate, Route, Routes } from "react-router-dom";
 import AuthLayout from "./components/auth/layout";
 import Register from "./pages/auth/register";
@@ -21,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./store/auth-slice";
 import PaypalReturnPage from "./pages/shopping-cart/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-cart/paypal-success";
+import Login from "./pages/auth/Login";
 
 function App() {
   // const isAuthenticated = false;
