@@ -21,7 +21,7 @@ import {
 } from "../ui/dropdown-menu";
 
 import { Avatar, AvatarFallback } from "../ui/avatar";
-import { logoutUser } from "@/store/auth-slice";
+import { logoutUser, resetToken } from "@/store/auth-slice";
 import CartWrapper from "./CartWrapper";
 import { Badge } from "../ui/badge";
 import { fetchCartItems } from "@/store/shop/cart-slice";
@@ -68,7 +68,10 @@ function HeaderRightContent() {
   const dispatch = useDispatch();
   const [openCartSheet, setOpenCartSheet] = useState(false);
   function handleLogout() {
-    dispatch(logoutUser());
+    // dispatch(logoutUser());
+    dispatch(resetToken());
+    sessionStorage.clear();
+    navigate("auth/login");
   }
   useEffect(() => {
     dispatch(fetchCartItems(user?.id));

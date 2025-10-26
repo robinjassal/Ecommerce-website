@@ -32,9 +32,11 @@ function App() {
     (state) => state.auth
   );
 
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispath(checkAuth());
+    const token = JSON.parse(sessionStorage.getItem("token"));
+    console.log(token);
+    dispatch(checkAuth(token));
   }, []);
 
   if (isLoading) return <p>loading...</p>;
